@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thiệp Mời Cưới — Tên Chú Rể & Tên Cô Dâu</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #8b2635;
+  --gold-light: #d4a5a0;
+  --cream: #f5ede6;
+  --blush: #ede0d4;
+  --rose: #6b1a24;
+  --dark: #3a0d13;
+  --text: #4a2028;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color: var(--text); }
+
+/* ── MUSIC PLAYER ── */
+.music-player {
+  position: fixed; bottom: 28px; left: 28px; z-index: 999;
+  display: flex; align-items: center; gap: 10px;
+}
+.play-btn {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--gold); color: #fff; border: none;
+  font-size: 20px; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(139,38,53,.45);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, transform .2s;
+}
+.play-btn:hover { background: var(--rose); transform: scale(1.1); }
+.play-btn.playing { animation: pulse 2s infinite; }
+.music-label {
+  background: rgba(255,255,255,.95);
+  border: 1px solid var(--gold-light);
+  border-radius: 20px; padding: 6px 14px;
+  font-family: 'Montserrat', sans-serif; font-size: 11px;
+  color: var(--text); letter-spacing: .5px;
+  backdrop-filter: blur(10px);
+  max-width: 150px; overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; min-height: 100vh;
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  /* ĐỔI ẢNH NỀN: thay url() bên dưới */
+  background: linear-gradient(135deg,#ede0d4 0%,#f5ede6 50%,#d4a5a0 100%);
+  /* background-image: url('anh-nen.jpg'); background-size: cover; background-position: center; */
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(253,248,240,.25) 0%, rgba(253,248,240,.65) 100%);
+}
+/* Hoa rơi */
+.petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.petal {
+  position: absolute; top: -40px;
+  width: 12px; height: 12px;
+  border-radius: 50% 0 50% 0;
+  opacity: .6;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity:.6; }
+  100% { transform: translateY(110vh) rotate(720deg); opacity:0; }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 60px 40px;
+  animation: fadeUp 1.2s ease both;
+}
+.hero-invite {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+}
+.hero-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(44px,9vw,100px);
+  color: var(--dark); line-height: 1.15; margin-bottom: 16px;
+  white-space: nowrap;
+}
+.hero-names .bride { color: var(--rose); }
+.hero-amp { font-size: clamp(28px,5vw,56px); color: var(--gold); display: block; }
+.hero-date {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; letter-spacing: 6px; color: var(--gold); margin: 20px 0;
+}
+.hero-ornament { color: var(--gold); font-size: 18px; letter-spacing: 10px; }
+.hero-tagline {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-top: 12px;
+}
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: bounce 2s infinite; z-index: 2;
+}
+.scroll-hint span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px; letter-spacing: 3px; color: var(--gold); text-transform: uppercase;
+}
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom,var(--gold),transparent); }
+
+/* ── SECTION BASE ── */
+.section { padding: 90px 60px; }
+.section-label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--gold);
+  text-align: center; margin-bottom: 10px;
+}
+.section-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: 54px; text-align: center;
+  color: var(--dark); margin-bottom: 50px;
+}
+.gold-line { width: 80px; height: 1px; background: var(--gold); margin: 0 auto 40px; }
+
+/* ── FAMILIES ── */
+.families-wrap { max-width: 960px; margin: 0 auto; }
+.families-grid {
+  display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; align-items: center;
+}
+.family-card {
+  background: #fff; border: 1px solid var(--gold-light);
+  border-radius: 16px; padding: 36px 28px; text-align: center;
+  box-shadow: 0 6px 40px rgba(139,38,53,.08);
+}
+.family-role {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+}
+.family-person-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px; color: var(--dark); margin-bottom: 20px;
+}
+.family-parents { font-size: 16px; line-height: 1.9; font-style: italic; }
+.family-addr {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; color: #bbb; margin-top: 14px; line-height: 1.7;
+}
+.families-mid {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 10px;
+}
+.families-mid::before, .families-mid::after {
+  content: ''; width: 1px; height: 50px;
+  background: linear-gradient(to bottom,transparent,var(--gold-light),transparent);
+}
+.heart-icon { font-size: 26px; color: var(--rose); animation: heartbeat 1.5s infinite; }
+
+/* ── EVENTS ── */
+.events-bg { background: linear-gradient(135deg,var(--blush) 0%,var(--cream) 100%); }
+.events-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px; max-width: 820px; margin: 0 auto;
+}
+.event-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,.06); border: 1px solid var(--gold-light); }
+.event-head {
+  background: linear-gradient(135deg,#8b2635 0%,#6b1a24 100%);
+  color: #fff; padding: 22px 28px; text-align: center;
+}
+.event-type { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: .85; margin-bottom: 4px; }
+.event-weekday { font-family: 'Great Vibes',cursive; font-size: 30px; }
+.event-body { padding: 28px; text-align: center; }
+.event-day { font-family: 'Cormorant Garamond',serif; font-size: 64px; font-weight: 300; color: var(--gold); line-height: 1; }
+.event-month { font-family: 'Montserrat',sans-serif; font-size: 12px; letter-spacing: 2px; color: var(--text); opacity: .55; margin-bottom: 18px; }
+.event-time { font-family: 'Montserrat',sans-serif; font-size: 12px; font-weight: 500; color: var(--rose); line-height: 1.9; margin-bottom: 14px; }
+.event-loc { font-size: 15px; font-style: italic; color: var(--text); line-height: 1.7; }
+
+/* ── COUPLE ── */
+.couple-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 800px; margin: 0 auto; }
+.person-card { text-align: center; }
+.person-photo-ring {
+  width: 210px; height: 210px; border-radius: 50%;
+  border: 4px solid var(--gold-light);
+  box-shadow: 0 8px 40px rgba(139,38,53,.2);
+  margin: 0 auto 22px;
+  overflow: hidden;
+  background: var(--blush);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 52px;
+}
+/* ĐỔI ẢNH CÔ DÂU / CHÚ RỂ: thay src trong thẻ img bên dưới */
+.person-photo-ring img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.person-role { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.person-name { font-family: 'Great Vibes',cursive; font-size: 48px; color: var(--dark); margin-bottom: 16px; }
+.person-quote { font-size: 15px; font-style: italic; color: var(--text); line-height: 1.9; max-width: 260px; margin: 0 auto; }
+
+/* ── ALBUM — FILM STRIP AUTO SCROLL ── */
+.album-section { overflow: hidden; padding: 80px 0; background: #2a080d; }
+.album-section .section-label { color: var(--gold-light); }
+.album-section .section-title { color: #fff; margin-bottom: 40px; }
+
+.film-track-wrap {
+  position: relative; overflow: hidden;
+  /* Sprocket holes top & bottom */
+}
+.sprockets {
+  height: 24px;
+  background: repeating-linear-gradient(90deg, var(--dark) 0px, var(--dark) 16px, #111 16px, #111 32px);
+  border-top: 2px solid #111; border-bottom: 2px solid #111;
+  display: flex; align-items: center;
+}
+.sprockets::after {
+  content: '';
+  display: block; width: 100%; height: 10px;
+  background: repeating-linear-gradient(90deg,transparent 0,transparent 24px,rgba(255,255,255,.12) 24px,rgba(255,255,255,.12) 40px);
+}
+
+.film-strip {
+  display: flex; gap: 6px;
+  padding: 6px 0;
+  background: #111;
+  width: max-content;
+  animation: filmScroll 28s linear infinite;
+}
+.film-strip:hover { animation-play-state: paused; }
+
+.film-frame {
+  flex: 0 0 280px; height: 200px;
+  overflow: hidden; border-radius: 2px;
+  background: #222;
+  position: relative;
+}
+.film-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: sepia(.15) contrast(1.05);
+  transition: filter .3s;
+}
+.film-frame:hover img { filter: sepia(0) contrast(1.1); }
+/* Placeholder khi chưa có ảnh */
+.film-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px; color: #555;
+  font-family: 'Montserrat',sans-serif; font-size: 11px; letter-spacing: 1px;
+}
+.film-placeholder span { font-size: 30px; }
+
+@keyframes filmScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.album-hint {
+  text-align: center; margin-top: 20px;
+  font-family: 'Montserrat',sans-serif; font-size: 11px;
+  color: rgba(255,255,255,.3); letter-spacing: 2px;
+}
+
+/* ── QR / GIFT ── */
+.gift-section { padding: 90px 60px; max-width: 900px; margin: 0 auto; text-align: center; }
+.gift-sub { font-family: 'Montserrat',sans-serif; font-size: 12px; color: #bbb; letter-spacing: .5px; margin-bottom: 50px; }
+.qr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.qr-card { background: #fff; border: 1px solid var(--gold-light); border-radius: 18px; padding: 36px 28px; box-shadow: 0 6px 30px rgba(139,38,53,.08); }
+.qr-role { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.qr-person { font-family: 'Great Vibes',cursive; font-size: 38px; color: var(--dark); margin-bottom: 22px; }
+.qr-img-wrap {
+  width: 160px; height: 160px;
+  border: 2px solid var(--gold-light); border-radius: 12px;
+  margin: 0 auto; overflow: hidden; background: var(--cream);
+  display: flex; align-items: center; justify-content: center; font-size: 38px;
+}
+/* ĐỔI ẢNH QR: thay src trong thẻ img bên dưới */
+.qr-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.qr-note { font-family: 'Montserrat',sans-serif; font-size: 11px; color: #ccc; margin-top: 12px; }
+
+/* ── FOOTER ── */
+footer { background: #2a080d; color: var(--gold-light); text-align: center; padding: 70px 40px; }
+.footer-names { font-family: 'Great Vibes',cursive; font-size: 56px; color: var(--gold); margin-bottom: 14px; }
+.footer-tag { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 4px; opacity: .5; text-transform: uppercase; margin-bottom: 24px; }
+.footer-quote { font-family: 'Cormorant Garamond',serif; font-size: 18px; font-style: italic; opacity: .65; max-width: 480px; margin: 0 auto; line-height: 1.9; }
+.footer-credit { font-family: 'Montserrat',sans-serif; font-size: 9px; color: rgba(255,255,255,.2); letter-spacing: 2px; margin-top: 32px; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+@keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
+@keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+@keyframes pulse { 0%,100%{box-shadow:0 4px 20px rgba(139,38,53,.4)} 50%{box-shadow:0 4px 36px rgba(139,38,53,.85)} }
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .section{padding:60px 24px}
+  .families-grid{grid-template-columns:1fr; gap:20px}
+  .families-mid{flex-direction:row}
+  .families-mid::before,.families-mid::after{width:40px;height:1px}
+  .events-grid,.couple-grid,.qr-grid{grid-template-columns:1fr}
+  .film-frame{flex:0 0 220px;height:160px}
+}
+
+@media(max-width:480px){
+  /* Hero: tên không bị vỡ */
+  .hero-names {
+    font-size: clamp(36px, 11vw, 60px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 98vw;
+  }
+  .hero-amp { font-size: clamp(24px, 7vw, 40px); }
+  .hero-content { padding: 40px 12px; }
+
+  /* Section title: không xuống hàng xấu */
+  .section-title {
+    font-size: 40px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Couple section title "Cô Dâu & Chú Rể" */
+  .couple-section-title {
+    white-space: nowrap;
+    font-size: 36px;
+  }
+
+  /* Curtain title */
+  .curtain-title {
+    font-size: clamp(28px, 9vw, 50px);
+    white-space: nowrap;
+  }
+
+  /* Gift section */
+  .gift-section { padding: 60px 16px; }
+
+  /* Person photo smaller */
+  .person-photo-ring { width: 160px; height: 160px; font-size: 40px; }
+  .person-name { font-size: 38px; }
+
+  /* Film */
+  .film-frame{flex:0 0 180px;height:130px}
+
+  /* Footer */
+  .footer-names { font-size: 40px; }
+
+  /* Loingo */
+  .loingo-text { padding: 40px 20px 30px; }
+  .thankyou-text { font-size: clamp(36px, 10vw, 60px); }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════ INTRO CURTAIN ════════════════ -->
+<div id="curtain">
+  <div class="curtain-left"></div>
+  <div class="curtain-right"></div>
+  <div class="curtain-clouds" id="curtainClouds"></div>
+  <div class="curtain-center">
+    <div class="curtain-heart">❤</div>
+    <div class="curtain-title">Thiệp Mời Cưới</div>
+    <div class="curtain-sub">Nhấp để mở</div>
+  </div>
+</div>
+
+<style>
+/* ── CURTAIN INTRO ── */
+#curtain {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: stretch;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.curtain-left, .curtain-right {
+  width: 50%; height: 100%;
+  position: relative;
+  transition: transform 1.4s cubic-bezier(.77,0,.18,1);
+}
+.curtain-left {
+  background: linear-gradient(135deg, #6b1a24 0%, #8b2635 50%, #a33040 100%);
+  transform-origin: left center;
+}
+.curtain-right {
+  background: linear-gradient(225deg, #6b1a24 0%, #8b2635 50%, #a33040 100%);
+  transform-origin: right center;
+}
+
+/* Texture hoa văn trên màn */
+.curtain-left::before, .curtain-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,.04) 0%, transparent 35%),
+    repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,.02) 30px, rgba(255,255,255,.02) 31px);
+}
+
+/* Viền vàng trong màn */
+.curtain-left::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, transparent, #d4a5a0, #f5ede6, #d4a5a0, transparent);
+}
+.curtain-right::after {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, transparent, #d4a5a0, #f5ede6, #d4a5a0, transparent);
+}
+
+/* Nội dung giữa màn */
+.curtain-center {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; z-index: 2;
+  pointer-events: none;
+  animation: fadeUp .8s ease both .3s;
+}
+.curtain-heart {
+  font-size: 52px; color: #f5ede6;
+  animation: heartbeat 1.4s infinite;
+  display: block; margin-bottom: 12px;
+  text-shadow: 0 0 30px rgba(255,200,200,.5);
+}
+.curtain-title {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(36px, 7vw, 64px);
+  color: #f5ede6;
+  text-shadow: 0 2px 20px rgba(0,0,0,.3);
+  margin-bottom: 16px;
+}
+.curtain-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(245,237,230,.6);
+  animation: blink 1.5s ease infinite;
+}
+
+/* Mây hoa bay trên màn */
+.curtain-clouds {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  overflow: hidden;
+}
+.c-cloud {
+  position: absolute;
+  font-size: 32px;
+  opacity: 0;
+  animation: cloudFloat linear infinite;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.15));
+}
+
+/* Khi mở: 2 nửa màn trượt ra */
+#curtain.opening .curtain-left  { transform: translateX(-100%); }
+#curtain.opening .curtain-right { transform: translateX(100%); }
+#curtain.opening .curtain-center { opacity: 0; transition: opacity .4s; }
+#curtain.opening .c-cloud { animation-play-state: paused; opacity: 0 !important; transition: opacity .3s; }
+#curtain.hidden { display: none; }
+
+@keyframes cloudFloat {
+  0%   { transform: translateY(110vh) translateX(0) rotate(0deg); opacity: 0; }
+  5%   { opacity: .9; }
+  90%  { opacity: .7; }
+  100% { transform: translateY(-20vh) translateX(30px) rotate(20deg); opacity: 0; }
+}
+@keyframes blink {
+  0%,100% { opacity: .6; }
+  50%      { opacity: 1; }
+}
+</style>
+
+<!-- ════════════════ AUDIO ════════════════ -->
+<!--
+  CÁCH ĐỔI NHẠC:
+  Thay src bên dưới bằng đường dẫn file mp3 của bạn,
+  hoặc link mp3 online.
+-->
+<audio id="bgMusic" loop
+  src="https://pub-71ce9fc022db452e8bd5f1cd01ad6ba1.r2.dev/Music/%C4%90o%E1%BA%A1n%20K%E1%BA%BFt%20(Happy%20Ending)%20(HITStory%20Live%20Version)%20(mp3cut.net).mp3">
+</audio>
+
+<!-- Music player UI -->
+<div class="music-player">
+  <button class="play-btn" id="playBtn" onclick="toggleMusic()">🎵</button>
+  <div class="music-label" id="musicLabel">Đoạn Kết — Happy Ending</div>
+</div>
+
+<!-- ════════════════ HERO ════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <!-- Cánh hoa rơi -->
+  <div class="petals" id="petals"></div>
+
+  <div class="hero-content">
+    <p class="hero-invite">✦ Trân trọng kính mời ✦</p>
+    <div style="color:var(--gold);letter-spacing:10px;margin-bottom:16px">❧</div>
+    <h1 class="hero-names">
+      <!-- ĐỔI TÊN CHÚ RỂ -->
+      Tên Chú Rể
+      <span class="hero-amp">&amp;</span>
+      <!-- ĐỔI TÊN CÔ DÂU -->
+      <span class="bride">Tên Cô Dâu</span>
+    </h1>
+    <!-- ĐỔI NGÀY CƯỚI -->
+    <p class="hero-date">06 · 06 · 2026</p>
+    <p class="hero-ornament">· · · ✦ · · ·</p>
+    <p class="hero-tagline">Together Forever</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Cuộn xuống</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ════════════════ GIA ĐÌNH ════════════════ -->
+<section class="section" style="background:var(--cream)">
+  <div class="families-wrap">
+    <p class="section-label">Hai họ thông gia</p>
+    <h2 class="section-title">Gia Đình</h2>
+    <div class="families-grid">
+
+      <!-- NHÀ GÁI -->
+      <div class="family-card">
+        <div class="family-role">Nhà Gái</div>
+        <!-- ĐỔI TÊN CÔ DÂU -->
+        <div class="family-person-name">Tên Cô Dâu</div>
+        <div class="family-parents">
+          <!-- ĐỔI TÊN CHA MẸ NHÀ GÁI -->
+          Ông: <strong>Ba Cô Dâu</strong><br>
+          Bà: <strong>Mẹ Cô Dâu</strong>
+        </div>
+        <!-- ĐỔI ĐỊA CHỈ -->
+        <div class="family-addr">Tổ 2, Ấp 4, Sông Ray, Đồng Nai</div>
+      </div>
+
+      <div class="families-mid"><div class="heart-icon">❤</div></div>
+
+      <!-- NHÀ TRAI -->
+      <div class="family-card">
+        <div class="family-role">Nhà Trai</div>
+        <!-- ĐỔI TÊN CHÚ RỂ -->
+        <div class="family-person-name">Tên Chú Rể</div>
+        <div class="family-parents">
+          <!-- ĐỔI TÊN CHA MẸ NHÀ TRAI -->
+          Ông: <strong>Ba Chú Rể</strong><br>
+          Bà: <strong>Mẹ Chú Rể</strong>
+        </div>
+        <!-- ĐỔI ĐỊA CHỈ -->
+        <div class="family-addr">Thôn 4, Xã Quảng Trị, Huyện Đạ Tẻh, Lâm Đồng</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════ SỰ KIỆN ════════════════ -->
+<section class="section events-bg">
+  <p class="section-label">Lịch trình</p>
+  <h2 class="section-title">Ngày Trọng Đại</h2>
+  <div class="events-grid">
+
+    <div class="event-card">
+      <div class="event-head">
+        <div class="event-type">Lễ Vu Quy · Tiệc Nhà Gái</div>
+        <div class="event-weekday">Thứ Bảy</div>
+      </div>
+      <div class="event-body">
+        <div class="event-day">06</div><!-- ĐỔI NGÀY -->
+        <div class="event-month">Tháng 06 · 2026</div><!-- ĐỔI THÁNG NĂM -->
+        <div class="event-time">⏰ 09:00 — Lễ Vu Quy<br>11:00 — Tiệc Cưới</div>
+        <div class="event-loc">Tư Gia Nhà Gái<br>Sông Ray, Đồng Nai</div><!-- ĐỔI ĐỊA ĐIỂM -->
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-head">
+        <div class="event-type">Lễ Thành Hôn · Tiệc Nhà Trai</div>
+        <div class="event-weekday">Thứ Ba</div>
+      </div>
+      <div class="event-body">
+        <div class="event-day">09</div><!-- ĐỔI NGÀY -->
+        <div class="event-month">Tháng 06 · 2026</div><!-- ĐỔI THÁNG NĂM -->
+        <div class="event-time">⏰ 09:00 — Lễ Thành Hôn<br>11:00 — Tiệc Cưới</div>
+        <div class="event-loc">Tư Gia Nhà Trai<br>Đạ Tẻh, Lâm Đồng</div><!-- ĐỔI ĐỊA ĐIỂM -->
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ CÔ DÂU & CHÚ RỂ ════════════════ -->
+<section class="section" style="background:var(--cream)">
+  <p class="section-label">Về chúng mình</p>
+  <h2 class="section-title" style="white-space:nowrap;font-size:clamp(32px,7vw,54px)">Cô Dâu &amp; Chú Rể</h2>
+  <div class="couple-grid">
+
+    <!-- CHÚ RỂ -->
+    <div class="person-card">
+      <div class="person-photo-ring">
+        🤵
+        <!--
+          ĐỔI ẢNH CHÚ RỂ:
+          Xóa chữ 🤵 ở trên, bỏ comment thẻ img bên dưới
+          và thay src bằng đường dẫn ảnh của bạn.
+          <img src="chu-re.jpg" alt="Chú Rể">
+        -->
+      </div>
+      <div class="person-role">Chú Rể</div>
+      <!-- ĐỔI TÊN -->
+      <div class="person-name">Tên Chú Rể</div>
+      <!-- ĐỔI LỜI TÂM TƯ -->
+      <p class="person-quote">Khoảnh khắc gặp được em, anh đã quyết định sẽ cùng em đi đến hết cuộc đời.</p>
+    </div>
+
+    <!-- CÔ DÂU -->
+    <div class="person-card">
+      <div class="person-photo-ring">
+        👰
+        <!--
+          ĐỔI ẢNH CÔ DÂU:
+          Xóa chữ 👰 ở trên, bỏ comment thẻ img bên dưới
+          và thay src bằng đường dẫn ảnh của bạn.
+          <img src="co-dau.jpg" alt="Cô Dâu">
+        -->
+      </div>
+      <div class="person-role">Cô Dâu</div>
+      <!-- ĐỔI TÊN -->
+      <div class="person-name">Tên Cô Dâu</div>
+      <!-- ĐỔI LỜI TÂM TƯ -->
+      <p class="person-quote">Giữa thế gian huyên náo, anh là lý do để em mỉm cười mỗi ngày.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ ALBUM ẢNH — FILM STRIP ════════════════ -->
+<section class="album-section">
+  <p class="section-label">Kỷ niệm</p>
+  <h2 class="section-title">Album Ảnh</h2>
+
+  <div class="film-track-wrap">
+    <div class="sprockets"></div>
+    <!--
+      CÁCH THÊM ẢNH VÀO ALBUM:
+      Trong .film-strip bên dưới, thêm các thẻ:
+        <div class="film-frame"><img src="ten-anh.jpg" alt="..."></div>
+      Để cuộn mượt, các ảnh được nhân đôi tự động bằng JS.
+    -->
+    <div class="film-strip" id="filmStrip">
+      <!-- ĐỔI / THÊM ẢNH TẠI ĐÂY -->
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 1</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 2</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 3</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 4</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 5</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 6</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 7</div></div>
+      <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 8</div></div>
+    </div>
+    <div class="sprockets"></div>
+  </div>
+  <p class="album-hint">✦ Di chuột để tạm dừng ✦</p>
+</section>
+
+<!-- ════════════════ QR MỪNG CƯỚI ════════════════ -->
+<section class="gift-section">
+  <p class="section-label">Gửi quà mừng</p>
+  <h2 class="section-title">Hộp Quà</h2>
+  <div class="gold-line"></div>
+  <p class="gift-sub">Quét mã QR để gửi lời chúc và quà mừng đến cô dâu chú rể</p>
+  <div class="qr-grid">
+
+    <!-- QR CÔ DÂU -->
+    <div class="qr-card">
+      <div class="qr-role">Cô Dâu</div>
+      <div class="qr-person">Tên Cô Dâu</div><!-- ĐỔI TÊN -->
+      <div class="qr-img-wrap">
+        📱
+        <!--
+          ĐỔI ẢNH QR CÔ DÂU:
+          Xóa 📱, bỏ comment và thay src:
+          <img src="qr-co-dau.jpg" alt="QR Cô Dâu">
+        -->
+      </div>
+      <p class="qr-note">Nhấp để phóng to</p>
+    </div>
+
+    <!-- QR CHÚ RỂ -->
+    <div class="qr-card">
+      <div class="qr-role">Chú Rể</div>
+      <div class="qr-person">Tên Chú Rể</div><!-- ĐỔI TÊN -->
+      <div class="qr-img-wrap">
+        📱
+        <!--
+          ĐỔI ẢNH QR CHÚ RỂ:
+          Xóa 📱, bỏ comment và thay src:
+          <img src="qr-chu-re.jpg" alt="QR Chú Rể">
+        -->
+      </div>
+      <p class="qr-note">Nhấp để phóng to</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════════════════ LỜI NGỎ ════════════════ -->
+<section class="loingo-section">
+  <div class="hearts-wrap" id="heartsWrap"></div>
+  <!-- Phần text lời ngỏ -->
+  <div class="loingo-text">
+    <h2 class="loingo-title">LỜI NGỎ</h2>
+    <div class="loingo-divider"></div>
+    <p class="loingo-body">
+      <!-- ĐỔI NỘI DUNG LỜI NGỎ -->
+      Gửi đến gia đình và bạn bè thân mến,<br><br>
+      Trong hành trình dài đầy ắp kỷ niệm, chúng mình chính thức bắt đầu một chương đường mới của cuộc đời — thật hạnh phúc và vinh dự khi bao khi được chia sẻ niềm vui ấy cùng mọi người.<br><br>
+      Chúng mình cần thêm không khí lắm lắm đấy ạ, cùng chúng mình và bao giờ những khoảnh khắc và ý nghĩa bên mảu.<br><br>
+      Sự hiện diện của bạn là tất cả niềm hạnh phúc lớn lao và là món quà đặc biệt nhất đối với chúng mình.
+    </p>
+    <div class="loingo-divider" style="margin-top:28px"></div>
+    <p class="loingo-sign">Tên Chú Rể &amp; Tên Cô Dâu</p><!-- ĐỔI TÊN -->
+  </div>
+
+  <!-- Ảnh cặp đôi + Thank you -->
+  <div class="loingo-photo-wrap">
+    <!--
+      ĐỔI ẢNH CẶP ĐÔI (ảnh dọc):
+      Thay src bên dưới bằng đường dẫn ảnh của bạn
+    -->
+    <img class="loingo-photo" src="" alt="Cô dâu & Chú rể" id="loingo-img">
+    <!-- Placeholder khi chưa có ảnh -->
+    <div class="loingo-placeholder" id="loingo-placeholder">
+      <span>📷</span>
+      <p>Thay src ảnh trong code</p>
+    </div>
+    <div class="thankyou-overlay">
+      <span class="thankyou-text">Thank you!</span>
+    </div>
+  </div>
+</section>
+
+<!-- Nút scroll lên trên -->
+<button class="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Lên đầu trang">↑</button>
+
+<style>
+/* ── LỜI NGỎ ── */
+.loingo-section {
+  background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loingo-text {
+  padding: 70px 40px 50px;
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.loingo-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 20px;
+}
+
+.loingo-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 24px;
+}
+
+.loingo-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  line-height: 1.95;
+  color: var(--text);
+  font-style: italic;
+}
+
+.loingo-sign {
+  font-family: 'Great Vibes', cursive;
+  font-size: 38px;
+  color: var(--rose);
+  margin-top: 10px;
+}
+
+/* ── ẢNH + THANK YOU ── */
+.loingo-photo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.loingo-photo {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  min-height: 400px;
+}
+
+.loingo-placeholder {
+  width: 100%;
+  min-height: 420px;
+  background: linear-gradient(135deg, var(--blush), var(--gold-light));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.loingo-placeholder span { font-size: 48px; }
+
+.thankyou-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px 20px 32px;
+  background: linear-gradient(to top, rgba(44,36,22,.72) 0%, transparent 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.thankyou-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(48px, 12vw, 80px);
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0,0,0,.3);
+  letter-spacing: 2px;
+}
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  transition: background .2s, transform .2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.scroll-top:hover { background: var(--gold); color: #fff; transform: translateY(-3px); }
+
+/* Responsive */
+@media(max-width:600px){
+  .loingo-text { padding: 50px 24px 36px; }
+  .loingo-photo-wrap { max-width: 100%; }
+}
+
+/* ── HEARTS RAIN ── */
+.hearts-wrap {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.loingo-section { position: relative; }
+.loingo-text, .loingo-photo-wrap { position: relative; z-index: 2; }
+
+.heart-drop {
+  position: absolute;
+  top: -40px;
+  font-size: 18px;
+  opacity: 0;
+  animation: heartFall linear infinite;
+  user-select: none;
+}
+
+@keyframes heartFall {
+  0%   { transform: translateY(0) rotate(-15deg) scale(0.8); opacity: 0; }
+  10%  { opacity: .75; }
+  80%  { opacity: .6; }
+  100% { transform: translateY(105vh) rotate(20deg) scale(1.1); opacity: 0; }
+}
+</style>
+
+<!-- ════════════════ JAVASCRIPT ════════════════ -->
+<script>
+/* ── CURTAIN INTRO ── */
+(function(){
+  const curtain = document.getElementById('curtain');
+  const cloudsWrap = document.getElementById('curtainClouds');
+
+  // Tạo mây hoa hồng bay lên
+  const items = ['🌸','🌹','🌺','💮','🌷','❀','✿','🍀','🌼'];
+  for(let i = 0; i < 28; i++){
+    const c = document.createElement('div');
+    c.className = 'c-cloud';
+    c.textContent = items[Math.floor(Math.random() * items.length)];
+    c.style.left = (Math.random() * 100) + '%';
+    c.style.fontSize = (18 + Math.random() * 28) + 'px';
+    c.style.animationDuration = (5 + Math.random() * 7) + 's';
+    c.style.animationDelay = (Math.random() * 6) + 's';
+    cloudsWrap.appendChild(c);
+  }
+
+  function openCurtain(){
+    curtain.classList.add('opening');
+    // Sau khi animation xong thì ẩn hẳn
+    setTimeout(() => curtain.classList.add('hidden'), 1600);
+    // Phát nhạc
+    if(!playing){
+      audio.play().then(()=>{
+        playing = true;
+        playBtn.textContent = '⏸';
+        playBtn.classList.add('playing');
+      }).catch(()=>{});
+    }
+  }
+
+  curtain.addEventListener('click', openCurtain);
+  curtain.addEventListener('touchstart', openCurtain, {passive: true});
+
+  // Tự động mở sau 10 giây nếu không nhấn
+  setTimeout(() => {
+    if(!curtain.classList.contains('opening')) openCurtain();
+  }, 10000);
+})();
+
+/* ── CÁNH HOA RƠI ── */
+(function(){
+  const wrap = document.getElementById('petals');
+  const colors = ['#f5a0a0','#f7c3c3','#e8d5a3','#ffd6cc','#ffb6c1'];
+  for(let i=0;i<22;i++){
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random()*100 + '%';
+    p.style.width = p.style.height = (8 + Math.random()*10) + 'px';
+    p.style.background = colors[Math.floor(Math.random()*colors.length)];
+    p.style.animationDuration = (6 + Math.random()*10) + 's';
+    p.style.animationDelay = (-Math.random()*12) + 's';
+    p.style.borderRadius = Math.random() > .5 ? '50% 0 50% 0' : '50%';
+    wrap.appendChild(p);
+  }
+})();
+
+/* ── HEARTS RAIN (Lời Ngỏ) ── */
+(function(){
+  const wrap = document.getElementById('heartsWrap');
+  if(!wrap) return;
+  const emojis = ['❤️','🩷','💕','💖','💗','🌸'];
+  const count = 18;
+  for(let i = 0; i < count; i++){
+    const h = document.createElement('div');
+    h.className = 'heart-drop';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left = (Math.random() * 100) + '%';
+    h.style.fontSize = (14 + Math.random() * 16) + 'px';
+    h.style.animationDuration = (8 + Math.random() * 10) + 's';
+    h.style.animationDelay = (-Math.random() * 14) + 's';
+    wrap.appendChild(h);
+  }
+})();
+
+/* ── FILM STRIP — nhân đôi để loop mượt ── */
+(function(){
+  const strip = document.getElementById('filmStrip');
+  // Clone toàn bộ nội dung để tạo vòng lặp liền mạch
+  strip.innerHTML += strip.innerHTML;
+  // Tự chỉnh tốc độ theo tổng chiều rộng
+  const totalW = strip.scrollWidth / 2;
+  const speed = totalW / 60; // px/s
+  const dur = totalW / speed;
+  strip.style.animationDuration = dur + 's';
+})();
+
+/* ── MUSIC ── */
+const audio = document.getElementById('bgMusic');
+const playBtn = document.getElementById('playBtn');
+const musicLabel = document.getElementById('musicLabel');
+let playing = false;
+
+function toggleMusic(){
+  if(playing){ audio.pause(); playing=false; playBtn.textContent='🎵'; playBtn.classList.remove('playing'); }
+  else { audio.play().catch(()=>{}); playing=true; playBtn.textContent='⏸'; playBtn.classList.add('playing'); }
+}
+
+// Nhạc được phát từ curtain khi mở
+
+/* ── LỜI NGỎ ảnh ── */
+(function(){
+  const img = document.getElementById('loingo-img');
+  const ph  = document.getElementById('loingo-placeholder');
+  if(img && img.getAttribute('src')){
+    img.style.display = 'block';
+    if(ph) ph.style.display = 'none';
+  }
+})();
+
+/* ── SCROLL REVEAL ── */
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.style.animation='fadeUp .8s ease both'; });
+},{threshold:.15});
+document.querySelectorAll('.family-card,.event-card,.person-card,.qr-card').forEach(el=>{
+  el.style.opacity='0'; el.style.transform='translateY(24px)';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
