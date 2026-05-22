@@ -490,7 +490,7 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 <!-- Music player UI -->
 <div class="music-player">
   <button class="play-btn" id="playBtn" onclick="toggleMusic()">🎵</button>
-  <div class="music-label" id="musicLabel">Đoạn Kết — Happy Ending</div>
+  <div class="music-label" id="musicLabel">nhấn vào</div>
 </div>
 
 <!-- ════════════════ HERO ════════════════ -->
@@ -922,6 +922,15 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
     cloudsWrap.appendChild(c);
   }
 
+  function tryPlayAfterInteraction(){
+    if(playing) return;
+    audio.play().then(()=>{
+      playing = true;
+      playBtn.textContent = '⏸';
+      playBtn.classList.add('playing');
+    }).catch(()=>{});
+  }
+
   function openCurtain(){
     curtain.classList.add('opening');
     // Sau khi animation xong thì ẩn hẳn
@@ -932,7 +941,12 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
         playing = true;
         playBtn.textContent = '⏸';
         playBtn.classList.add('playing');
-      }).catch(()=>{});
+      }).catch(()=>{
+        // Nếu mở tự động, trình duyệt có thể chặn autoplay.
+        // Thử phát nhạc lại khi người dùng tương tác tiếp theo.
+        document.addEventListener('click', tryPlayAfterInteraction, { once: true, passive: true });
+        document.addEventListener('touchstart', tryPlayAfterInteraction, { once: true, passive: true });
+      });
     }
   }
 
@@ -944,6 +958,11 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
     if(!curtain.classList.contains('opening')) openCurtain();
   }, 10000);
 })();
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('keydown', e => {
+  if(e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) e.preventDefault();
+});
 
 /* ── CÁNH HOA RƠI ── */
 (function(){
