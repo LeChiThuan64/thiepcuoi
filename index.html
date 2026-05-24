@@ -52,15 +52,12 @@ body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color
 }
 .hero-bg {
   position: absolute; inset: 0;
-  /* ĐỔI ẢNH NỀN: thay url() bên dưới */
   background: linear-gradient(135deg,#ede0d4 0%,#f5ede6 50%,#d4a5a0 100%);
-  /* background-image: url('anh-nen.jpg'); background-size: cover; background-position: center; */
 }
 .hero-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to bottom, rgba(253,248,240,.25) 0%, rgba(253,248,240,.65) 100%);
 }
-/* Hoa rơi */
 .petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .petal {
   position: absolute; top: -40px;
@@ -195,7 +192,6 @@ body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color
   display: flex; align-items: center; justify-content: center;
   font-size: 52px;
 }
-/* ĐỔI ẢNH CÔ DÂU / CHÚ RỂ: thay src trong thẻ img bên dưới */
 .person-photo-ring img { width: 100%; height: 100%; object-fit: cover; display: none; }
 .person-role { font-family: 'Montserrat',sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .person-name { font-family: 'Great Vibes',cursive; font-size: 48px; color: var(--dark); margin-bottom: 16px; }
@@ -206,10 +202,7 @@ body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color
 .album-section .section-label { color: var(--gold-light); }
 .album-section .section-title { color: #fff; margin-bottom: 40px; }
 
-.film-track-wrap {
-  position: relative; overflow: hidden;
-  /* Sprocket holes top & bottom */
-}
+.film-track-wrap { position: relative; overflow: hidden; }
 .sprockets {
   height: 24px;
   background: repeating-linear-gradient(90deg, var(--dark) 0px, var(--dark) 16px, #111 16px, #111 32px);
@@ -243,7 +236,6 @@ body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color
   transition: filter .3s;
 }
 .film-frame:hover img { filter: sepia(0) contrast(1.1); }
-/* Placeholder khi chưa có ảnh */
 .film-placeholder {
   width: 100%; height: 100%;
   display: flex; flex-direction: column;
@@ -277,7 +269,6 @@ body { font-family: 'Cormorant Garamond', serif; background: var(--cream); color
   margin: 0 auto; overflow: hidden; background: var(--cream);
   display: flex; align-items: center; justify-content: center; font-size: 38px;
 }
-/* ĐỔI ẢNH QR: thay src trong thẻ img bên dưới */
 .qr-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: none; }
 .qr-note { font-family: 'Montserrat',sans-serif; font-size: 11px; color: #ccc; margin-top: 12px; }
 
@@ -294,7 +285,7 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
 @keyframes pulse { 0%,100%{box-shadow:0 4px 20px rgba(139,38,53,.4)} 50%{box-shadow:0 4px 36px rgba(139,38,53,.85)} }
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE GỐC ── */
 @media(max-width:768px){
   .section{padding:60px 24px}
   .families-grid{grid-template-columns:1fr; gap:20px}
@@ -305,7 +296,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 }
 
 @media(max-width:480px){
-  /* Hero: tên không bị vỡ */
   .hero-names {
     font-size: clamp(36px, 11vw, 60px);
     white-space: nowrap;
@@ -315,43 +305,187 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   }
   .hero-amp { font-size: clamp(24px, 7vw, 40px); }
   .hero-content { padding: 40px 12px; }
-
-  /* Section title: không xuống hàng xấu */
   .section-title {
     font-size: 40px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  /* Couple section title "Cô Dâu & Chú Rể" */
-  .couple-section-title {
-    white-space: nowrap;
-    font-size: 36px;
-  }
-
-  /* Curtain title */
-  .curtain-title {
-    font-size: clamp(28px, 9vw, 50px);
-    white-space: nowrap;
-  }
-
-  /* Gift section */
+  .couple-section-title { white-space: nowrap; font-size: 36px; }
+  .curtain-title { font-size: clamp(28px, 9vw, 50px); white-space: nowrap; }
   .gift-section { padding: 60px 16px; }
-
-  /* Person photo smaller */
   .person-photo-ring { width: 160px; height: 160px; font-size: 40px; }
   .person-name { font-size: 38px; }
-
-  /* Film */
   .film-frame{flex:0 0 180px;height:130px}
-
-  /* Footer */
   .footer-names { font-size: 40px; }
-
-  /* Loingo */
   .loingo-text { padding: 40px 20px 30px; }
   .thankyou-text { font-size: clamp(36px, 10vw, 60px); }
+}
+
+/* ══════════════════════════════════════════════════
+   MOBILE OPTIMIZATIONS — tối ưu thêm cho mobile
+   ══════════════════════════════════════════════════ */
+
+/* Loại bỏ tap highlight xanh trên iOS/Android */
+* { -webkit-tap-highlight-color: transparent; }
+
+/* Tránh iOS zoom khi focus vào button */
+button { font-size: 16px; }
+
+/* Smooth scroll trên iOS */
+html { -webkit-overflow-scrolling: touch; }
+
+/* ── TOUCH TARGETS — tối thiểu 44×44px ── */
+.play-btn  { min-width: 52px; min-height: 52px; }
+.scroll-top { min-width: 50px; min-height: 50px; }
+
+/* ── MUSIC PLAYER & SCROLL TOP: không chồng nhau ── */
+@media (max-width: 480px) {
+  .music-player {
+    bottom: 16px;
+    left: 14px;
+    gap: 8px;
+  }
+  .play-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 18px;
+  }
+  .music-label {
+    max-width: 110px;
+    font-size: 10px;
+    padding: 5px 10px;
+  }
+  .scroll-top {
+    bottom: 16px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+}
+
+/* ── CURTAIN: chữ vừa màn hình nhỏ ── */
+@media (max-width: 480px) {
+  .curtain-title {
+    font-size: clamp(28px, 8vw, 48px) !important;
+    white-space: nowrap;
+  }
+  .curtain-heart { font-size: 40px; }
+  .curtain-sub   { font-size: 10px; letter-spacing: 2px; }
+}
+
+/* ── HERO: tên không bị overflow ── */
+@media (max-width: 480px) {
+  .hero-content { padding: 36px 10px 72px; }
+  .hero-names {
+    font-size: clamp(28px, 9.5vw, 54px) !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.25;
+  }
+  .hero-amp   { font-size: clamp(20px, 6.5vw, 36px) !important; }
+  .hero-date  { font-size: 16px; letter-spacing: 3px; margin: 14px 0; }
+  .hero-ornament { letter-spacing: 5px; font-size: 15px; }
+  .hero-invite { font-size: 9px; letter-spacing: 3px; }
+}
+
+/* ── SECTION CHUNG ── */
+@media (max-width: 480px) {
+  .section { padding: 48px 14px; }
+  .section-title {
+    font-size: 38px !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    line-height: 1.2;
+    margin-bottom: 32px;
+  }
+  .section-label { font-size: 9px; letter-spacing: 3px; }
+  .gold-line { margin-bottom: 28px; }
+}
+
+/* ── GIA ĐÌNH ── */
+@media (max-width: 480px) {
+  .family-card { padding: 24px 16px; border-radius: 12px; }
+  .family-person-name { font-size: 34px; margin-bottom: 14px; }
+  .family-parents { font-size: 14px; }
+  .family-addr { font-size: 10px; }
+}
+
+/* ── SỰ KIỆN ── */
+@media (max-width: 480px) {
+  .events-grid { gap: 16px; }
+  .event-day  { font-size: 50px; }
+  .event-body { padding: 20px 16px; }
+  .event-head { padding: 18px 16px; }
+  .event-weekday { font-size: 26px; }
+  .event-type { font-size: 9px; }
+  .event-time { font-size: 11px; }
+  .event-loc  { font-size: 13px; }
+}
+
+/* ── CÔ DÂU & CHÚ RỂ ── */
+@media (max-width: 480px) {
+  .couple-grid { gap: 28px; }
+  .person-photo-ring { width: 148px; height: 148px; font-size: 36px; }
+  .person-name  { font-size: 34px; margin-bottom: 10px; }
+  .person-quote { font-size: 13px; max-width: 90%; }
+}
+
+/* ── ALBUM FILM STRIP ── */
+@media (max-width: 480px) {
+  .film-frame { flex: 0 0 155px !important; height: 115px !important; }
+  .album-section { padding: 52px 0; }
+  .album-hint { font-size: 9px; margin-top: 14px; }
+  .sprockets { height: 18px; }
+  .film-placeholder { font-size: 9px; }
+  .film-placeholder span { font-size: 22px; }
+}
+
+/* ── QR / GIFT ── */
+@media (max-width: 480px) {
+  .gift-section   { padding: 48px 14px; }
+  .gift-sub       { font-size: 11px; margin-bottom: 32px; }
+  .qr-grid        { gap: 16px; }
+  .qr-card        { padding: 28px 20px; border-radius: 14px; }
+  .qr-person      { font-size: 32px; margin-bottom: 16px; }
+  .qr-img-wrap    { width: 136px; height: 136px; }
+}
+
+/* ── LỜI NGỎ ── */
+@media (max-width: 600px) {
+  .loingo-text { padding: 48px 18px 32px; }
+  .loingo-body { font-size: 15px; line-height: 1.85; }
+  .loingo-sign { font-size: 32px; }
+  .loingo-title { font-size: 11px; letter-spacing: 5px; }
+}
+@media (max-width: 480px) {
+  .thankyou-text { font-size: clamp(42px, 10vw, 70px) !important; }
+  .loingo-placeholder { min-height: 300px; }
+}
+
+/* ── FOOTER ── */
+@media (max-width: 480px) {
+  footer        { padding: 48px 16px; }
+  .footer-names { font-size: 42px; }
+  .footer-quote { font-size: 14px; line-height: 1.8; }
+  .footer-tag   { font-size: 9px; letter-spacing: 3px; margin-bottom: 18px; }
+}
+
+/* ── SCROLL HINT ── */
+@media (max-width: 480px) {
+  .scroll-hint { bottom: 16px; }
+  .scroll-line { height: 28px; }
+}
+
+/* ── FILM STRIP: chạy nhanh hơn chút trên mobile ── */
+@media (max-width: 480px) {
+  .film-strip { animation-duration: 20s !important; }
 }
 </style>
 </head>
@@ -392,7 +526,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   transform-origin: right center;
 }
 
-/* Texture hoa văn trên màn */
 .curtain-left::before, .curtain-right::before {
   content: '';
   position: absolute; inset: 0;
@@ -402,7 +535,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
     repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,.02) 30px, rgba(255,255,255,.02) 31px);
 }
 
-/* Viền vàng trong màn */
 .curtain-left::after {
   content: '';
   position: absolute; top: 0; right: 0; bottom: 0;
@@ -416,7 +548,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   background: linear-gradient(to bottom, transparent, #d4a5a0, #f5ede6, #d4a5a0, transparent);
 }
 
-/* Nội dung giữa màn */
 .curtain-center {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -445,7 +576,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   animation: blink 1.5s ease infinite;
 }
 
-/* Mây hoa bay trên màn */
 .curtain-clouds {
   position: absolute; inset: 0; pointer-events: none; z-index: 3;
   overflow: hidden;
@@ -458,7 +588,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   filter: drop-shadow(0 2px 6px rgba(0,0,0,.15));
 }
 
-/* Khi mở: 2 nửa màn trượt ra */
 #curtain.opening .curtain-left  { transform: translateX(-100%); }
 #curtain.opening .curtain-right { transform: translateX(100%); }
 #curtain.opening .curtain-center { opacity: 0; transition: opacity .4s; }
@@ -478,11 +607,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 </style>
 
 <!-- ════════════════ AUDIO ════════════════ -->
-<!--
-  CÁCH ĐỔI NHẠC:
-  Thay src bên dưới bằng đường dẫn file mp3 của bạn,
-  hoặc link mp3 online.
--->
 <audio id="bgMusic" loop
   src="https://pub-71ce9fc022db452e8bd5f1cd01ad6ba1.r2.dev/Music/%C4%90o%E1%BA%A1n%20K%E1%BA%BFt%20(Happy%20Ending)%20(HITStory%20Live%20Version)%20(mp3cut.net).mp3">
 </audio>
@@ -497,20 +621,16 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
-  <!-- Cánh hoa rơi -->
   <div class="petals" id="petals"></div>
 
   <div class="hero-content">
     <p class="hero-invite">✦ Trân trọng kính mời ✦</p>
     <div style="color:var(--gold);letter-spacing:10px;margin-bottom:16px">❧</div>
     <h1 class="hero-names">
-      <!-- ĐỔI TÊN CHÚ RỂ -->
       Tên Chú Rể
       <span class="hero-amp">&amp;</span>
-      <!-- ĐỔI TÊN CÔ DÂU -->
       <span class="bride">Tên Cô Dâu</span>
     </h1>
-    <!-- ĐỔI NGÀY CƯỚI -->
     <p class="hero-date">06 · 06 · 2026</p>
     <p class="hero-ornament">· · · ✦ · · ·</p>
     <p class="hero-tagline">Together Forever</p>
@@ -528,33 +648,25 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
     <h2 class="section-title">Gia Đình</h2>
     <div class="families-grid">
 
-      <!-- NHÀ GÁI -->
       <div class="family-card">
         <div class="family-role">Nhà Gái</div>
-        <!-- ĐỔI TÊN CÔ DÂU -->
         <div class="family-person-name">Tên Cô Dâu</div>
         <div class="family-parents">
-          <!-- ĐỔI TÊN CHA MẸ NHÀ GÁI -->
           Ông: <strong>Ba Cô Dâu</strong><br>
           Bà: <strong>Mẹ Cô Dâu</strong>
         </div>
-        <!-- ĐỔI ĐỊA CHỈ -->
         <div class="family-addr">Tổ 2, Ấp 4, Sông Ray, Đồng Nai</div>
       </div>
 
       <div class="families-mid"><div class="heart-icon">❤</div></div>
 
-      <!-- NHÀ TRAI -->
       <div class="family-card">
         <div class="family-role">Nhà Trai</div>
-        <!-- ĐỔI TÊN CHÚ RỂ -->
         <div class="family-person-name">Tên Chú Rể</div>
         <div class="family-parents">
-          <!-- ĐỔI TÊN CHA MẸ NHÀ TRAI -->
           Ông: <strong>Ba Chú Rể</strong><br>
           Bà: <strong>Mẹ Chú Rể</strong>
         </div>
-        <!-- ĐỔI ĐỊA CHỈ -->
         <div class="family-addr">Thôn 4, Xã Quảng Trị, Huyện Đạ Tẻh, Lâm Đồng</div>
       </div>
 
@@ -574,10 +686,10 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
         <div class="event-weekday">Thứ Bảy</div>
       </div>
       <div class="event-body">
-        <div class="event-day">06</div><!-- ĐỔI NGÀY -->
-        <div class="event-month">Tháng 06 · 2026</div><!-- ĐỔI THÁNG NĂM -->
+        <div class="event-day">06</div>
+        <div class="event-month">Tháng 06 · 2026</div>
         <div class="event-time">⏰ 09:00 — Lễ Vu Quy<br>11:00 — Tiệc Cưới</div>
-        <div class="event-loc">Tư Gia Nhà Gái<br>Sông Ray, Đồng Nai</div><!-- ĐỔI ĐỊA ĐIỂM -->
+        <div class="event-loc">Tư Gia Nhà Gái<br>Sông Ray, Đồng Nai</div>
       </div>
     </div>
 
@@ -587,10 +699,10 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
         <div class="event-weekday">Thứ Ba</div>
       </div>
       <div class="event-body">
-        <div class="event-day">09</div><!-- ĐỔI NGÀY -->
-        <div class="event-month">Tháng 06 · 2026</div><!-- ĐỔI THÁNG NĂM -->
+        <div class="event-day">09</div>
+        <div class="event-month">Tháng 06 · 2026</div>
         <div class="event-time">⏰ 09:00 — Lễ Thành Hôn<br>11:00 — Tiệc Cưới</div>
-        <div class="event-loc">Tư Gia Nhà Trai<br>Đạ Tẻh, Lâm Đồng</div><!-- ĐỔI ĐỊA ĐIỂM -->
+        <div class="event-loc">Tư Gia Nhà Trai<br>Đạ Tẻh, Lâm Đồng</div>
       </div>
     </div>
 
@@ -603,39 +715,21 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   <h2 class="section-title" style="white-space:nowrap;font-size:clamp(32px,7vw,54px)">Cô Dâu &amp; Chú Rể</h2>
   <div class="couple-grid">
 
-    <!-- CHÚ RỂ -->
     <div class="person-card">
       <div class="person-photo-ring">
         🤵
-        <!--
-          ĐỔI ẢNH CHÚ RỂ:
-          Xóa chữ 🤵 ở trên, bỏ comment thẻ img bên dưới
-          và thay src bằng đường dẫn ảnh của bạn.
-          <img src="chu-re.jpg" alt="Chú Rể">
-        -->
       </div>
       <div class="person-role">Chú Rể</div>
-      <!-- ĐỔI TÊN -->
       <div class="person-name">Tên Chú Rể</div>
-      <!-- ĐỔI LỜI TÂM TƯ -->
       <p class="person-quote">Khoảnh khắc gặp được em, anh đã quyết định sẽ cùng em đi đến hết cuộc đời.</p>
     </div>
 
-    <!-- CÔ DÂU -->
     <div class="person-card">
       <div class="person-photo-ring">
         👰
-        <!--
-          ĐỔI ẢNH CÔ DÂU:
-          Xóa chữ 👰 ở trên, bỏ comment thẻ img bên dưới
-          và thay src bằng đường dẫn ảnh của bạn.
-          <img src="co-dau.jpg" alt="Cô Dâu">
-        -->
       </div>
       <div class="person-role">Cô Dâu</div>
-      <!-- ĐỔI TÊN -->
       <div class="person-name">Tên Cô Dâu</div>
-      <!-- ĐỔI LỜI TÂM TƯ -->
       <p class="person-quote">Giữa thế gian huyên náo, anh là lý do để em mỉm cười mỗi ngày.</p>
     </div>
 
@@ -649,14 +743,7 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 
   <div class="film-track-wrap">
     <div class="sprockets"></div>
-    <!--
-      CÁCH THÊM ẢNH VÀO ALBUM:
-      Trong .film-strip bên dưới, thêm các thẻ:
-        <div class="film-frame"><img src="ten-anh.jpg" alt="..."></div>
-      Để cuộn mượt, các ảnh được nhân đôi tự động bằng JS.
-    -->
     <div class="film-strip" id="filmStrip">
-      <!-- ĐỔI / THÊM ẢNH TẠI ĐÂY -->
       <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 1</div></div>
       <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 2</div></div>
       <div class="film-frame"><div class="film-placeholder"><span>📷</span>Ảnh 3</div></div>
@@ -679,33 +766,17 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   <p class="gift-sub">Quét mã QR để gửi lời chúc và quà mừng đến cô dâu chú rể</p>
   <div class="qr-grid">
 
-    <!-- QR CÔ DÂU -->
     <div class="qr-card">
       <div class="qr-role">Cô Dâu</div>
-      <div class="qr-person">Tên Cô Dâu</div><!-- ĐỔI TÊN -->
-      <div class="qr-img-wrap">
-        📱
-        <!--
-          ĐỔI ẢNH QR CÔ DÂU:
-          Xóa 📱, bỏ comment và thay src:
-          <img src="qr-co-dau.jpg" alt="QR Cô Dâu">
-        -->
-      </div>
+      <div class="qr-person">Tên Cô Dâu</div>
+      <div class="qr-img-wrap">📱</div>
       <p class="qr-note">Nhấp để phóng to</p>
     </div>
 
-    <!-- QR CHÚ RỂ -->
     <div class="qr-card">
       <div class="qr-role">Chú Rể</div>
-      <div class="qr-person">Tên Chú Rể</div><!-- ĐỔI TÊN -->
-      <div class="qr-img-wrap">
-        📱
-        <!--
-          ĐỔI ẢNH QR CHÚ RỂ:
-          Xóa 📱, bỏ comment và thay src:
-          <img src="qr-chu-re.jpg" alt="QR Chú Rể">
-        -->
-      </div>
+      <div class="qr-person">Tên Chú Rể</div>
+      <div class="qr-img-wrap">📱</div>
       <p class="qr-note">Nhấp để phóng to</p>
     </div>
 
@@ -715,29 +786,21 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 <!-- ════════════════ LỜI NGỎ ════════════════ -->
 <section class="loingo-section">
   <div class="hearts-wrap" id="heartsWrap"></div>
-  <!-- Phần text lời ngỏ -->
   <div class="loingo-text">
     <h2 class="loingo-title">LỜI NGỎ</h2>
     <div class="loingo-divider"></div>
     <p class="loingo-body">
-      <!-- ĐỔI NỘI DUNG LỜI NGỎ -->
       Gửi đến gia đình và bạn bè thân mến,<br><br>
       Trong hành trình dài đầy ắp kỷ niệm, chúng mình chính thức bắt đầu một chương đường mới của cuộc đời — thật hạnh phúc và vinh dự khi bao khi được chia sẻ niềm vui ấy cùng mọi người.<br><br>
       Chúng mình cần thêm không khí lắm lắm đấy ạ, cùng chúng mình và bao giờ những khoảnh khắc và ý nghĩa bên mảu.<br><br>
       Sự hiện diện của bạn là tất cả niềm hạnh phúc lớn lao và là món quà đặc biệt nhất đối với chúng mình.
     </p>
     <div class="loingo-divider" style="margin-top:28px"></div>
-    <p class="loingo-sign">Tên Chú Rể &amp; Tên Cô Dâu</p><!-- ĐỔI TÊN -->
+    <p class="loingo-sign">Tên Chú Rể &amp; Tên Cô Dâu</p>
   </div>
 
-  <!-- Ảnh cặp đôi + Thank you -->
   <div class="loingo-photo-wrap">
-    <!--
-      ĐỔI ẢNH CẶP ĐÔI (ảnh dọc):
-      Thay src bên dưới bằng đường dẫn ảnh của bạn
-    -->
     <img class="loingo-photo" src="" alt="Cô dâu & Chú rể" id="loingo-img">
-    <!-- Placeholder khi chưa có ảnh -->
     <div class="loingo-placeholder" id="loingo-placeholder">
       <span>📷</span>
       <p>Thay src ảnh trong code</p>
@@ -800,7 +863,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   margin-top: 10px;
 }
 
-/* ── ẢNH + THANK YOU ── */
 .loingo-photo-wrap {
   position: relative;
   width: 100%;
@@ -868,7 +930,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 }
 .scroll-top:hover { background: var(--gold); color: #fff; transform: translateY(-3px); }
 
-/* Responsive */
 @media(max-width:600px){
   .loingo-text { padding: 50px 24px 36px; }
   .loingo-photo-wrap { max-width: 100%; }
@@ -909,7 +970,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   const curtain = document.getElementById('curtain');
   const cloudsWrap = document.getElementById('curtainClouds');
 
-  // Tạo mây hoa hồng bay lên
   const items = ['🌸','🌹','🌺','💮','🌷','❀','✿','🍀','🌼'];
   for(let i = 0; i < 28; i++){
     const c = document.createElement('div');
@@ -933,17 +993,13 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
 
   function openCurtain(){
     curtain.classList.add('opening');
-    // Sau khi animation xong thì ẩn hẳn
     setTimeout(() => curtain.classList.add('hidden'), 1600);
-    // Phát nhạc
     if(!playing){
       audio.play().then(()=>{
         playing = true;
         playBtn.textContent = '⏸';
         playBtn.classList.add('playing');
       }).catch(()=>{
-        // Nếu mở tự động, trình duyệt có thể chặn autoplay.
-        // Thử phát nhạc lại khi người dùng tương tác tiếp theo.
         document.addEventListener('click', tryPlayAfterInteraction, { once: true, passive: true });
         document.addEventListener('touchstart', tryPlayAfterInteraction, { once: true, passive: true });
       });
@@ -953,7 +1009,6 @@ footer { background: #2a080d; color: var(--gold-light); text-align: center; padd
   curtain.addEventListener('click', openCurtain);
   curtain.addEventListener('touchstart', openCurtain, {passive: true});
 
-  // Tự động mở sau 10 giây nếu không nhấn
   setTimeout(() => {
     if(!curtain.classList.contains('opening')) openCurtain();
   }, 10000);
@@ -999,14 +1054,12 @@ document.addEventListener('keydown', e => {
   }
 })();
 
-/* ── FILM STRIP — nhân đôi để loop mượt ── * /
+/* ── FILM STRIP — nhân đôi để loop mượt ── */
 (function(){
   const strip = document.getElementById('filmStrip');
-  // Clone toàn bộ nội dung để tạo vòng lặp liền mạch
   strip.innerHTML += strip.innerHTML;
-  // Tự chỉnh tốc độ theo tổng chiều rộng
   const totalW = strip.scrollWidth / 2;
-  const speed = totalW / 60; // px/s
+  const speed = totalW / 60;
   const dur = totalW / speed;
   strip.style.animationDuration = dur + 's';
 })();
@@ -1021,8 +1074,6 @@ function toggleMusic(){
   if(playing){ audio.pause(); playing=false; playBtn.textContent='🎵'; playBtn.classList.remove('playing'); }
   else { audio.play().catch(()=>{}); playing=true; playBtn.textContent='⏸'; playBtn.classList.add('playing'); }
 }
-
-// Nhạc được phát từ curtain khi mở
 
 /* ── LỜI NGỎ ảnh ── */
 (function(){
@@ -1042,7 +1093,6 @@ document.querySelectorAll('.family-card,.event-card,.person-card,.qr-card').forE
   el.style.opacity='0'; el.style.transform='translateY(24px)';
   observer.observe(el);
 });
-
 </script>
 </body>
 </html>
